@@ -32,6 +32,7 @@ public class WordOwner : MonoBehaviour {
     public virtual void Enter_word()
     {
         words.Remove(words[0]);
+        AudioController.Get_AudioController().PlayOneShot(AudioController.SFX_Code.Gun_shot, 0.3f);
         Request_word();
         Display_word();
 
@@ -57,7 +58,8 @@ public class WordOwner : MonoBehaviour {
     {
         if(words.Count > 0)
         {
-            words[0].Check_Typed(letter);
+            if(words[0].Check_Typed(letter))
+                AudioController.Get_AudioController().PlayOneShot(AudioController.SFX_Code.Type_q, 0.1f);
             wDisplay.Update_typingText(words[0]);
             return true;
         }
