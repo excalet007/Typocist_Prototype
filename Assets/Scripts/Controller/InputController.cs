@@ -34,7 +34,7 @@ public class InputController : MonoBehaviour {
     private KeyCode button_Right;
     private KeyCode button_Shift;
     
-    private Vector3 move;
+    public Vector3 move;
     public float moveSpeed;
 
     private SpriteRenderer player_SRenderer;
@@ -68,6 +68,10 @@ public class InputController : MonoBehaviour {
     void Update()
     {
         #region Player Movement
+
+        // Re-Initialize
+        move = Vector3.zero;
+
         if (Input.GetKey(button_Shift))
         {
             if (Input.GetKey(button_Up))
@@ -94,8 +98,6 @@ public class InputController : MonoBehaviour {
                 move = move.normalized;
                 Player.GetComponentInChildren<Rigidbody2D>().MovePosition(Player.transform.position + move*Time.deltaTime*moveSpeed);
 
-                // Re-Initialize
-                move = Vector3.zero;
             }
             
         }
@@ -118,12 +120,6 @@ public class InputController : MonoBehaviour {
         #endregion
 
         #region Fast_Debugging
-        if (Input.GetKey(KeyCode.Alpha9))
-            moveSpeed -= 0.1f;
-
-        if (Input.GetKey(KeyCode.Alpha0))
-            moveSpeed += 0.1f;
-
         if (Input.GetKey(KeyCode.Home))
             SceneManager.LoadScene("Stage");
 

@@ -26,7 +26,7 @@ public class AudioController : MonoBehaviour {
     //const
     public enum SFX_Code
     {
-        Type_t, Type_q, Gun_shot, Gun_shot_heavy, winchester_reload
+        Type_t, Type_q, Gun_shot, Gun_shot_heavy, Winchester_reload
     };
     private const float maxVolume = 1f;
     private const float minVolume = 0f; 
@@ -92,8 +92,6 @@ public class AudioController : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            PlayOneShot(SFX_Code.winchester_reload, 0.5f);
     }
     #endregion
 
