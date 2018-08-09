@@ -8,7 +8,7 @@ public class WordOwner : MonoBehaviour {
     private WordSpawner wSpawner;
     private WordDisplay wDisplay;
     
-    private void Start()
+    protected virtual void Start()
     {
         wSpawner = WordSpawner.Get_WordSpawner();
         wDisplay = GetComponentInChildren<WordDisplay>();
@@ -35,6 +35,8 @@ public class WordOwner : MonoBehaviour {
         AudioController.Get_AudioController().PlayOneShot(AudioController.SFX_Code.Gun_shot, 0.3f);
         Request_word();
         Display_word();
+
+        InputController.Get_InputController().Set_aniTrig("trigShot");
 
         WordManager.Get_WordManager().Reset_typings();
     }
@@ -64,6 +66,11 @@ public class WordOwner : MonoBehaviour {
             return true;
         }
         return false;
+    }
+
+    protected virtual void Update()
+    {
+        ;
     }
 
 }

@@ -26,6 +26,8 @@ public class InputController : MonoBehaviour {
 
     #region Field
     public Transform Player;
+    public Animator Player_animator;
+
     public List<WordOwner> List_WordOwner;
     
     private KeyCode button_Up;
@@ -37,8 +39,13 @@ public class InputController : MonoBehaviour {
     public Vector3 move;
     public float moveSpeed;
 
-    private SpriteRenderer player_SRenderer;
+    public SpriteRenderer player_SRenderer;
     #endregion
+
+    public void Set_aniTrig(string id)
+    {
+        Player_animator.SetTrigger(id);
+    }
 
     void Start()
     {
@@ -63,6 +70,10 @@ public class InputController : MonoBehaviour {
 
         // Initalize Link
         player_SRenderer = Player.GetComponentInChildren<SpriteRenderer>();
+
+        //Test
+        Player_animator = Player.GetComponent<Animator>();
+
     }
 
     void Update()
@@ -90,17 +101,20 @@ public class InputController : MonoBehaviour {
                     player_SRenderer.flipX = false;
                 if (move.x < 0)
                     player_SRenderer.flipX = true;
-
-                // Detacting Obstacles
-
-
+                
                 // Normalize Value & Move
                 move = move.normalized;
                 Player.GetComponentInChildren<Rigidbody2D>().MovePosition(Player.transform.position + move*Time.deltaTime*moveSpeed);
+            
 
             }
             
         }
+
+        //Animation
+        if (move != Vector3.zero) Player_animator.SetInteger("enumState",1);
+        else Player_animator.SetInteger("enumState",0);
+    
         #endregion
 
         #region Word Detection
